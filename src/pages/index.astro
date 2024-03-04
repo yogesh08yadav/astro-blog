@@ -1,0 +1,27 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+let obj = {
+	name: "BMC",
+	location: "Pune",
+	teams: ["dev", "qa", "marketing"],
+};
+
+const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
+const data = await res.json();
+---
+
+<!-- <!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Astro Blog</title>
+	</head>
+	<body>
+		<ul>
+			{data.map((elem) => <li>{elem.title}</li>)}
+		</ul>
+	</body>
+</html> -->
+<MainLayout title="Blog" />

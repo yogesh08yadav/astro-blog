@@ -1,0 +1,11 @@
+---
+const { title } = Astro.props;
+---
+
+<div id="content-wrapper">
+    <h1>{title}</h1>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia, fuga.</p>
+    <slot name="before" />
+    <slot />
+    <!-- <slot> <h1>If no slot is passed</h1></slot> -->
+</div>
