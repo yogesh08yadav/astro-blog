@@ -1,0 +1,22 @@
+---
+import Link from "./Link.astro";
+const { text, href } = Astro.props;
+---
+
+<section class="container about" aria-label="About Me">
+    <img
+        src="/images/headshot.jpg"
+        alt="My headshot"
+        width="200"
+        height="330"
+    />
+    <div class="content">
+        <h1 class="h1">My Blog</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, aut.
+            Saepe maxime omnis expedita nobis, assumenda totam quas quisquam!
+            Repellat.
+        </p>
+        <Link href={href} style="primary" text={text} />
+    </div>
+</section>

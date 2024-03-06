@@ -1,27 +1,41 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { formatBlogPosts } from "../js/utils";
+import AboutSection from "../components/AboutSection.astro";
 
-let obj = {
-	name: "BMC",
-	location: "Pune",
-	teams: ["dev", "qa", "marketing"],
-};
+// let obj = {
+// 	name: "BMC",
+// 	location: "Pune",
+// 	teams: ["dev", "qa", "marketing"],
+// };
 
-const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
-const data = await res.json();
+// const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
+// const data = await res.json();
+
+const allPosts = await Astro.glob("./blog/*md");
+const filteredPost = formatBlogPosts(allPosts, {
+	filterOutDrafts: false,
+	filterOutFuturePosts: false,
+	sortByDate: true,
+	limit: 3,
+});
 ---
 
-<!-- <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Astro Blog</title>
-	</head>
-	<body>
-		<ul>
-			{data.map((elem) => <li>{elem.title}</li>)}
-		</ul>
-	</body>
-</html> -->
-<MainLayout title="Blog" />
+<MainLayout title="Blog">
+	<AboutSection text="👋 Say Hello" href="/about" />
+	<section class="container" aria-label="New Blog Posts">
+		<h2 class="h1">New Blog Posts</h2>
+		<div class="post-container">
+			{
+				filteredPost.map((post) => (
+					<PostCard
+						frontmatter={post.frontmatter}
+						url={post.url}
+						tagtype="h3"
+					/>
+				))
+			}
+		</div>
+	</section>
+</MainLayout>

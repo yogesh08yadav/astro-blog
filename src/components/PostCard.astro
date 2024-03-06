@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import Link from "./Link.astro";
+
+const { frontmatter, url, tagtype } = Astro.props;
+console.log(frontmatter);
+const Tag = tagtype;
+const { title, date, author, image, description, category } = frontmatter;
+---
+
+<article class="card">
+    <small>
+        <a href={`/category/${category}`} class="badge">{category}</a>
+    </small>
+    <a href={url} aria-hidden="true" tabindex="-1">
+        <Image
+            src={image.src}
+            alt={image.alt}
+            width="450"
+            height="250"
+            format="webp"
+            quality={80}
+        />
+    </a>
+    <div class="content">
+        <div>
+            <Tag class="h3"><a href={url}> {title}</a></Tag>
+            <p>
+                by <a href=`/author/${author}`>{author}</a>
+                {
+                    new Date(date).toLocaleDateString("en-US", {
+                        timeZone: "IST",
+                    })
+                }
+            </p>
+        </div>
+        <p>{description}</p>
+        <Link href={url} text="Read Post" style="secondary" />
+    </div>
+</article>
