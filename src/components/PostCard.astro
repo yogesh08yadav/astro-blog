@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import Link from "./Link.astro";
 
 const { frontmatter, url, tagtype } = Astro.props;
-console.log(frontmatter);
 const Tag = tagtype;
 const { title, date, author, image, description, category } = frontmatter;
 ---

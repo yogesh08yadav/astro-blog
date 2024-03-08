@@ -22,12 +22,11 @@ export async function getStaticPaths({ paginate }) {
     });
 
     return paginate(filteredPost, {
-        pageSize: 2,
+        pageSize: 3,
     });
 }
 
 const { page } = Astro.props as { page: Page };
-console.log("page", page);
 ---
 
 <MainLayout title="My Blog">
@@ -44,6 +43,6 @@ console.log("page", page);
                 ))
             }
         </div>
-        <!-- <Pagination prevUrl={page.url.prev} nextUrl={page/> -->
+        <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
     </section>
 </MainLayout>
